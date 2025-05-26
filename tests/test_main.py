@@ -1,5 +1,5 @@
 import pytest
-import os
+
 from main import read_csv_file, PayrollError
 
 

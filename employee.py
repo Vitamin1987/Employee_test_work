@@ -19,5 +19,5 @@ class Employee:
             raise ValueError("Часовая ставка не может быть отрицательной")
 
     def calculate_payout(self) -> float:
-        """Рассчитывает зарплату сотрудника."""
+        """Рассчитывает зарплату сотрудника: hours_worked * hourly_rate."""
         return self.hours_worked * self.hourly_rate

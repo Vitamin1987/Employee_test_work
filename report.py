@@ -33,7 +33,10 @@ class PayoutReport(Report):
             total_payout += payout
             name_field: str = f"{employee.name:<{max_name_length}}"
             dept_field: str = f"{employee.department:<{max_dept_length}}"
-            line: str = (f"Employee: {name_field}    Department: {dept_field}    Payout: ${payout:.0f}")
+            line: str = (
+                f"Employee: {name_field}    Department: {dept_field}    "
+                f"Payout: ${payout:.0f}"
+            )
             output.append(line)
 
         output.append(f"Total payout: ${total_payout:.0f}")
@@ -44,6 +47,7 @@ class PayoutReport(Report):
 REPORTS: dict[str, Report] = {
     "payout": PayoutReport(),
 }
+
 
 def generate_report(report_type: str, employees: List[Employee]) -> str:
     """Генерирует отчёт указанного типа."""
