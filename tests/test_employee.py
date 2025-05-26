@@ -2,25 +2,20 @@ import pytest
 from employee import Employee
 
 
-def test_employee_calculate_payout():
-    employee = Employee(
-        id=1,
-        email="alice@example.com",
-        name="Alice Johnson",
-        department="Marketing",
-        hours_worked=160,
-        hourly_rate=50
-    )
-    assert employee.calculate_payout() == 8000
+@pytest.mark.parametrize("hours, rate, expected", [
+    (160, 50, 8000),
+    (150, 40, 6000),
+    (170, 60, 10200),
+])
+def test_employee_calculate_payout(hours, rate, expected):
+    employee = Employee(1, "test@example.com", "Test User", "Test", hours, rate)
+    assert employee.calculate_payout() == expected
 
 
-def test_employee_negative_hours():
+@pytest.mark.parametrize("hours, rate", [
+    (-10, 40),
+    (160, -50),
+])
+def test_employee_negative_values(hours, rate):
     with pytest.raises(ValueError):
-        Employee(
-            id=2,
-            email="bob@example.com",
-            name="Bob Smith",
-            department="Design",
-            hours_worked=-10,
-            hourly_rate=40
-        )
+        Employee(2, "test@example.com", "Test User", "Test", hours, rate)
